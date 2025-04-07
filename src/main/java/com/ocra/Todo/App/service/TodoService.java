@@ -3,6 +3,7 @@ package com.ocra.Todo.App.service;
 import com.ocra.Todo.App.model.Todo;
 import com.ocra.Todo.App.repo.TodoInterDatabase;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -33,6 +34,7 @@ public class TodoService {
         Todo existId = repoTodoDatabase.findById(Id).orElseThrow(() -> new RuntimeException("ID of todo not found"));
         // i have edit this things for edit the todo
         existId.setTitle(todo.getTitle());
+        existId.setDescription(todo.getDescription());
         existId.setStatus(todo.getStatus());
         existId.setDate(todo.getDate());
         return repoTodoDatabase.save(existId);
@@ -43,5 +45,17 @@ public class TodoService {
         repoTodoDatabase.deleteById(Id); // this is correct
     }
 
+    // add more description
+    public Todo addMoreDescription(Long Id, Todo todo){
+        Todo existId = repoTodoDatabase.findById(Id).orElseThrow(null);
+        existId.setDescription(todo.getDescription());
+        return repoTodoDatabase.save(existId);
+    }
 
+    // change or update the status
+    public Todo updateTodoStatus(Long Id, Todo todo){
+        Todo existId = repoTodoDatabase.findById(Id).orElseThrow(null);
+        existId.setStatus(todo.getStatus());
+        return repoTodoDatabase.save(existId);
+    }
 }

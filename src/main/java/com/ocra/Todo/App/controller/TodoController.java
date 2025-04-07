@@ -48,4 +48,17 @@ public class TodoController {
         service.deleteList(Id);
         return ResponseEntity.noContent().build(); // this will provide the clear status that represent not noContent 204
     }
+
+    @PutMapping("/editDesc/{Id}")
+    public ResponseEntity<Todo> addMoreDescription(@PathVariable Long Id, @RequestBody Todo todo){
+        Todo addDescription = service.addMoreDescription(Id,todo);
+        return ResponseEntity.ok(addDescription);
+    }
+
+    // update a status by Todo Id reference
+    @PutMapping("/editTodo/status/{Id}")
+    public ResponseEntity<Todo> updateTodoStatus(@PathVariable Long Id, @RequestBody Todo todo){
+        Todo updateStatus = service.updateTodoStatus(Id, todo);
+        return ResponseEntity.ok(updateStatus);
+    }
 }

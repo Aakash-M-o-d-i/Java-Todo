@@ -22,11 +22,14 @@ public class Todo {
     @Column
     private String status;
 
-    public Todo(Long Id, String title, Date date, String status){
+    @Column
+    private String description;
+    public Todo(Long Id, String title, String description,Date date, String status){
         this.Id = Id;
         this.title = title;
         this.date = date;
         this.status = status;
+        this.description = description;
     }
 
     public Todo(){
@@ -57,5 +60,11 @@ public class Todo {
     }
     public String getStatus(){
         return status;
+    }
+    public void setDescription(String description){
+        this.description = description;
+    }
+    public String getDescription(){
+        return description;
     }
 }
